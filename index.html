@@ -1,30 +1,163 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>V — Home</title>
-    <style>
-      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 2rem; color: #0f172a; }
-      header { margin-bottom: 1.5rem; }
-      h1 { font-size: 1.75rem; margin: 0 0 0.25rem; }
-      p.lead { color: #475569; margin: 0; }
-      .center { display:flex; align-items:center; justify-content:center; height:60vh; }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>V</h1>
-      <p class="lead">Welcome to the V repository — index page.</p>
-    </header>
-    <main class="center">
-      <div>
-        <p>This is a placeholder index.html added to the repository.</p>
-        <p>If you want a specific layout or content, tell me what to include.</p>
-      </div>
-    </main>
-    <footer>
-      <small>Generated on 2026-02-01</small>
-    </footer>
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ff4d6d, #ff758f, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 50px 60px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 2.6rem;
+    margin-bottom: 40px;
+  }
+
+  button {
+    padding: 15px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.25s ease;
+  }
+
+  #yes {
+    background: #ff2e63;
+    color: #fff;
+    left: 40%;
+    top: 65%;
+    box-shadow: 0 10px 20px rgba(255,46,99,0.5);
+  }
+
+  #no {
+    background: #fff;
+    color: #ff2e63;
+    left: 55%;
+    top: 65%;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .celebration {
+    color: #fff;
+    font-size: 2.2rem;
+    animation: pulse 0.8s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+
+  /* Floating background hearts */
+  .bg-heart {
+    position: fixed;
+    font-size: 20px;
+    animation: float 12s linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(100vh) scale(0.8);
+    }
+    to {
+      transform: translateY(-120vh) scale(1.4);
+    }
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 id="question">Will you be my Valentine? 💘</h1>
+  <button id="yes">Yes 💖</button>
+  <button id="no">No 🙃</button>
+
+  <div id="message" class="hidden celebration">
+    Yayyyy 💕🌹 <br>
+    Best decision ever 😘
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const question = document.getElementById("question");
+  const message = document.getElementById("message");
+
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("click", moveNoButton);
+
+  function moveNoButton() {
+    const padding = 20;
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  yesBtn.addEventListener("click", () => {
+    question.classList.add("hidden");
+    yesBtn.classList.add("hidden");
+    noBtn.classList.add("hidden");
+    message.classList.remove("hidden");
+  });
+
+  // Floating background hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "bg-heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.animationDuration = (8 + Math.random() * 5) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 12000);
+  }, 400);
+</script>
+
+
+</body>
 </html>
